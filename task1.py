@@ -67,7 +67,7 @@ def draw_cube_wo_front():
 def refresh_perspective(p_angle=100):
     glMatrixMode(GL_PROJECTION)
     aspect = width / height
-    gluPerspective(p_angle, aspect, near, far)
+    gluPerspective(p_angle, aspect, near, 10 * far)
 
     eye = (0, 0, 0)
     center = (0, 0, (near + far) / 2)
@@ -93,10 +93,13 @@ def draw():
         refresh_ortho()
     elif output_type == FOCUS60_VIEW:
         refresh_perspective(60)
+        glTranslatef(0, 0, 2.46 * near)
     elif output_type == FOCUS75_VIEW:
         refresh_perspective(75)
+        glTranslatef(0, 0, 1.6 * near)
     elif output_type == FOCUS100_VIEW:
         refresh_perspective(100)
+        glTranslatef(0, 0, .68 * near)
 
     draw_cube_wo_front()
 
