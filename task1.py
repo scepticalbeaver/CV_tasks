@@ -68,6 +68,8 @@ def refresh_perspective(p_angle=100):
     glMatrixMode(GL_PROJECTION)
     aspect = width / height
     gluPerspective(p_angle, aspect, near, 10 * far)
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
 
     eye = (0, 0, 0)
     center = (0, 0, (near + far) / 2)
@@ -78,7 +80,8 @@ def refresh_perspective(p_angle=100):
 
 
 def refresh_ortho():
-    glMatrixMode(GL_PROJECTION)
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
     near_val = 0
     far_val = -2 * width
     glOrtho(- width / 2, width / 2, - width / 2, width / 2, near_val, far_val)
@@ -86,6 +89,7 @@ def refresh_ortho():
 
 def draw():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     glViewport(0, 0, width, width)
 
