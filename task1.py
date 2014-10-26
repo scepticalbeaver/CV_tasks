@@ -11,8 +11,8 @@ left = - cube_width / 2
 right = -left
 top = cube_width / 2
 bottom = -top
-near = cube_width / 2
-far = near + cube_width / 2
+near = -cube_width / 2
+far = -(-near + cube_width / 2)
 
 ORTHO_VIEW = 0
 FOCUS60_VIEW = 1
@@ -66,32 +66,24 @@ def draw_cube_wo_front():
 
 def refresh_perspective(p_angle=100):
     glMatrixMode(GL_PROJECTION)
+    glLoadIdentity()
     aspect = width / height
-    gluPerspective(p_angle, aspect, near, 10 * far)
+    gluPerspective(p_angle, aspect, 0, 2 * far)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
-
-    eye = (0, 0, 0)
-    center = (0, 0, (near + far) / 2)
-    cam_up = (0, 1, 0)
-    gluLookAt(eye[0], eye[1], eye[2],
-              center[0], center[1], center[2],
-              cam_up[0], cam_up[1], cam_up[2])
 
 
 def refresh_ortho():
-    glMatrixMode(GL_MODELVIEW)
-    glLoadIdentity()
-    near_val = 0
-    far_val = -2 * width
-    glOrtho(- width / 2, width / 2, - width / 2, width / 2, near_val, far_val)
+    glOrtho(- width / 2, width / 2, - width / 2, width / 2, near, - 2 * far)
 
 
 def draw():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glViewport(0, 0, width, width)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    glViewport(0, 0, width, width)
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
 
     if output_type == ORTHO_VIEW:
         refresh_ortho()
