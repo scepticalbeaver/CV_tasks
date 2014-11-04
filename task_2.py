@@ -12,7 +12,7 @@ def open_image(path):
 def show_image(img):
     cv2.imshow("Display . . .", img)
     cv2.moveWindow("", 1, 1)
-    cv2.imwrite("output.png", img)
+    cv2.imwrite("task2_output.png", img)
 
 
 def wait_exit():
@@ -21,19 +21,10 @@ def wait_exit():
 
 
 def perform_changes_task2(img):
-    cv2.GaussianBlur(img, (5, 3), 0, img)
-    cv2.Laplacian(img, 0, img, 3, 10)
-    cv2.GaussianBlur(img, (29, 5), 0, img)
-    cv2.threshold(img, 50, 255, cv2.THRESH_BINARY, img)
-    #cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 21, 5, img)
-    return img
-
-
-def perform_changes_task3(img):
-    cv2.GaussianBlur(img, (9, 5), 0, img)
-    cv2.Laplacian(img, 0, img, 29, 1)
-    cv2.GaussianBlur(img, (31, 5), 1, img)
-    cv2.threshold(img, 50, 255, cv2.THRESH_BINARY, img)
+    cv2.GaussianBlur(img, (3, 3), 0, img)
+    cv2.Laplacian(img, 0, img, 1)
+    cv2.GaussianBlur(img, (19, 3), 7, img)
+    cv2.threshold(img, 10, 255, cv2.THRESH_BINARY, img)
     #cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 21, 5, img)
     return img
 
@@ -42,8 +33,7 @@ def main():
     img = open_image('text.bmp')
     e1 = cv2.getTickCount()
 
-    #img = perform_changes_task2(img)
-    img = perform_changes_task3(img)
+    img = perform_changes_task2(img)
 
     e2 = cv2.getTickCount()
     time = (e2 - e1) / cv2.getTickFrequency()
