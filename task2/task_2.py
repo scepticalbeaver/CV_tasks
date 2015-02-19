@@ -1,6 +1,6 @@
-import cv2
-
 __author__ = 'esenin'
+
+import cv2
 
 
 def open_image(path):
@@ -30,7 +30,7 @@ def perform_changes_task2(img):
 
 
 def main():
-    img = open_image('text.bmp')
+    img = open_image('../text.bmp')
     e1 = cv2.getTickCount()
 
     img = perform_changes_task2(img)

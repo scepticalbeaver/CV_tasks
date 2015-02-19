@@ -68,7 +68,7 @@ def filter_words(img):
 
 
 def main():
-    img = open_image('text.bmp')
+    img = open_image('../text.bmp')
     e1 = cv2.getTickCount()
 
     img, orig = filter_words(img)
